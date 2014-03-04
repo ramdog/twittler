@@ -1,0 +1,29 @@
+html {
+	font-family: helvetica;
+	background-color: rgb(200, 224, 255);
+}
+
+#page-title {
+	margin: 15px;
+	font-size: 25px;
+}
+
+#feed {
+	margin: 20px;
+	padding: 0px 10px;
+	background-color: rgb(219, 219, 219);
+	border: 3px solid rgb(131, 131, 131);
+	border-radius: 5px;
+}
+
+.tweet {
+	margin: 15px;
+	padding: 7px;
+	background-color: rgb(200, 200, 200);
+	border: 2px solid rgb(150, 150, 150);
+	border-radius: 5px;
+}
+
+.tweet-content {
+	margin-top: 10px;
+}
