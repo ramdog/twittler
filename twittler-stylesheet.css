@@ -1,6 +1,12 @@
 html {
 	font-family: helvetica;
-	background-color: rgb(200, 224, 255);
+	background-color: #A1CEFF;
+	max-width: 970px;
+	margin: auto;
+}
+
+#update-stream {
+	margin: 15px;
 }
 
 #page-title {
@@ -8,7 +14,7 @@ html {
 	font-size: 25px;
 }
 
-#feed {
+#stream {
 	margin: 20px;
 	padding: 0px 10px;
 	background-color: rgb(219, 219, 219);

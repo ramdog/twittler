@@ -3,33 +3,60 @@
   <head>
     <link rel="stylesheet" type="text/css" href="twittler-stylesheet.css">
     <script src="jquery.js"></script>
+    <script type="text/javascript" src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
     <script src="data_generator.js"></script>
   </head>
   <body>
     <script>
 
       $(document).ready(function(){
-        var $feed = $('#feed');
+        var $stream = $('#stream');
+        var homeStream = streams.home;
+        var homeStreamLen = streams.home.length;
+        var lastTweetTime = homeStream[homeStreamLen - 1].created_at;
 
-        var index = streams.home.length - 1;
+        var index = homeStreamLen - 1;
         while(index >= 0){
-          var tweet = streams.home[index];
+          var tweet = homeStream[index];
           var $tweet = $('<div class="tweet"><div class="tweet-header"></div><div class="tweet-content"></div></div>');
           $tweet.find('.tweet-header').text('@' + tweet.user + ' | ' + tweet.created_at);
           $tweet.find('.tweet-content').text(tweet.message);
-          $tweet.appendTo($feed);
+          $tweet.appendTo($stream);
           index -= 1;
         }
 
+        var newTweets = [];
+        var getLatestTweets = function() {
+          var latest = _.filter(streams.home, function(item) {
+            return item.created_at > lastTweetTime;
+          });
+          if (latest.length > 0) {
+            latest.sort(function(a, b) {return b.created_at - a.created_at});
+            lastTweetTime = latest[0].created_at;
+          }
+          return latest;
+        };
+
+        var updateTweetButton = function() {
+          var latest = getLatestTweets();
+          if (latest.length > 0){
+            newTweets = latest.concat(newTweets);
+            $('#new-tweets-count').text(newTweets.length);            
+          }
+        };
+
+        setInterval(updateTweetButton, 2000);
       });
 
     </script>
     <div>
-      <div id="feed">
+      <div id="stream-wrapper">
         <div id="page-title">Tweets</div>
-        <div class="tweet">
-          <div class="tweet-header">@testUser | 3-Mar-14 4:14pm PST</div>
-          <div class="tweet-content">Here is the test message I want to show here #yeehaw #booya</div>
+        <div id="update-stream">
+          <button name="update"><span id="new-tweets-count">0</span> New Tweets</button>
+        </div>
+        <div id="stream">
+          
         </div>
       </div>  
     </div>
