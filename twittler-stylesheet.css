@@ -1,24 +1,56 @@
 html {
 	font-family: helvetica;
-	background-color: #A1CEFF;
+	background-color: #DFEFFF;
 	max-width: 970px;
 	margin: auto;
 }
 
-#update-stream {
-	margin: 15px;
+button {
+	color: white;
+	background-color: #428bca;
+	margin-bottom: 0;
+	cursor: pointer;
+	background-image: none;
+	border: 1px solid rgb(117, 117, 117);
+	padding: 4px 8px;
+	font-size: 14px;
+	border-radius: 6px;
+}
+
+button:hover {
+	background-color: #3276b1;
+	border-color: black;
+}
+
+button:focus {
+	outline: none;
+}
+
+
+#button-contaier {
+	margin: 0px 15px 10px;
 }
 
 #page-title {
-	margin: 15px;
+	color: white;
+	margin: 5px 15px;
 	font-size: 25px;
+	font-family: "Arial Black";
+}
+
+#header {
+	margin: 20px 20px 0px;
+	padding: 0px 10px;
+	background-color: #A5A5A5;
+	border: 1px solid #838383;
+	border-radius: 5px;
 }
 
 #stream {
-	margin: 20px;
+	margin: 10px 20px 20px;
 	padding: 0px 10px;
-	background-color: rgb(219, 219, 219);
-	border: 3px solid rgb(131, 131, 131);
+	background-color: #DBDBDB;
+	border: 1px solid #838383;
 	border-radius: 5px;
 }
 
@@ -26,7 +58,7 @@ html {
 	margin: 15px;
 	padding: 7px;
 	background-color: rgb(200, 200, 200);
-	border: 2px solid rgb(150, 150, 150);
+	border: 1px solid rgb(150, 150, 150);
 	border-radius: 5px;
 }
 

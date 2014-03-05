@@ -11,22 +11,32 @@
 
       $(document).ready(function(){
         var $stream = $('#stream');
-        var homeStream = streams.home;
-        var homeStreamLen = streams.home.length;
-        var lastTweetTime = homeStream[homeStreamLen - 1].created_at;
+        var newTweets = streams.home.sort(function(a, b) {return b.created_at - a.created_at});
+        var lastTweetTime = newTweets[0].created_at;
 
-        var index = homeStreamLen - 1;
-        while(index >= 0){
-          var tweet = homeStream[index];
-          var $tweet = $('<div class="tweet"><div class="tweet-header"></div><div class="tweet-content"></div></div>');
-          $tweet.find('.tweet-header').text('@' + tweet.user + ' | ' + tweet.created_at);
-          $tweet.find('.tweet-content').text(tweet.message);
-          $tweet.appendTo($stream);
-          index -= 1;
+        addNewTweets();
+        setInterval(updateTweetButton, 5000);
+        // setTimeout(updateTweetButton, 5000);
+
+        $('button').on('click', function() {
+          addNewTweets();
+        });
+
+        function addNewTweets() {
+          for(var i = newTweets.length - 1; i >= 0; i--) {
+            var tweet = newTweets[i];
+            var $tweet = $('<div class="tweet"><div class="tweet-header"></div><div class="tweet-content"></div></div>');
+            console.log(tweet.created_at.getTime());
+            $tweet.find('.tweet-header').text('@' + tweet.user + ' | ' + tweet.created_at);
+            $tweet.find('.tweet-content').text(tweet.message);
+            $stream.prepend($tweet.hide().fadeIn('slow'));
+            // $tweet.prependTo($stream);
+          }
+          newTweets = [];
+          setTweetCount();
         }
 
-        var newTweets = [];
-        var getLatestTweets = function() {
+        function getLatestTweets() {
           var latest = _.filter(streams.home, function(item) {
             return item.created_at > lastTweetTime;
           });
@@ -35,30 +45,31 @@
             lastTweetTime = latest[0].created_at;
           }
           return latest;
+        }
+
+        function setTweetCount() {
+          $('#new-tweets-count').text(newTweets.length);
         };
 
-        var updateTweetButton = function() {
+        function updateTweetButton() {
           var latest = getLatestTweets();
           if (latest.length > 0){
             newTweets = latest.concat(newTweets);
-            $('#new-tweets-count').text(newTweets.length);            
+            setTweetCount();
           }
-        };
+        }
 
-        setInterval(updateTweetButton, 2000);
       });
 
     </script>
     <div>
-      <div id="stream-wrapper">
-        <div id="page-title">Tweets</div>
-        <div id="update-stream">
+      <div id="header">
+        <div id="page-title">Twittler</div>
+        <div id="button-contaier">
           <button name="update"><span id="new-tweets-count">0</span> New Tweets</button>
         </div>
-        <div id="stream">
-          
-        </div>
-      </div>  
+      </div>
+      <div id="stream"></div> 
     </div>
   </body>
 </html>
