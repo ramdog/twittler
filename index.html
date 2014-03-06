@@ -25,9 +25,13 @@
         function addNewTweets() {
           for(var i = newTweets.length - 1; i >= 0; i--) {
             var tweet = newTweets[i];
-            var $tweet = $('<div class="tweet"><div class="tweet-header"></div><div class="tweet-content"></div></div>');
-            console.log(tweet.created_at.getTime());
-            $tweet.find('.tweet-header').text('@' + tweet.user + ' | ' + tweet.created_at);
+            var $tweet = $('<div class="tweet"><div class="tweet-header"><div class="tweet-user"></div><div class="tweet-time"></div></div><div class="tweet-content"></div></div>');
+
+            var tweetTime = tweet.created_at
+            var formattedDate = tweetTime.getMonth() + "-" + tweetTime.getDate() + "-" + tweetTime.getFullYear();
+
+            $tweet.find('.tweet-user').html('<a href="#">@' + tweet.user + '</a>');
+            $tweet.find('.tweet-time').text(formattedDate);
             $tweet.find('.tweet-content').text(tweet.message);
             $stream.prepend($tweet.hide().fadeIn('slow'));
             // $tweet.prependTo($stream);
@@ -65,7 +69,7 @@
     <div>
       <div id="header">
         <div id="page-title">Twittler</div>
-        <div id="button-contaier">
+        <div id="button-container">
           <button name="update"><span id="new-tweets-count">0</span> New Tweets</button>
         </div>
       </div>
