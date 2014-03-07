@@ -5,7 +5,7 @@ html {
 	margin: auto;
 }
 
-button {
+#update-stream {
 	color: white;
 	background-color: #428bca;
 	margin-bottom: 0;
@@ -17,7 +17,7 @@ button {
 	border-radius: 6px;
 }
 
-button:hover {
+#update-stream:hover {
 	background-color: #3276b1;
 	border-color: black;
 }
@@ -32,11 +32,20 @@ button:focus {
 }
 
 #page-title {
-	color: white;
 	margin: 5px 15px;
+}
+
+#page-title-text {
+	color: white;
 	font-size: 30px;
 	font-family: "Arial Black";
+	cursor: pointer;
 }
+
+#page-title-text:hover {
+	color: rgb(100, 104, 180);
+}
+
 
 #header {
 	margin: 20px 20px 0px;
@@ -70,8 +79,14 @@ button:focus {
 .tweet-user a {
 	font-size: 18px;
 	text-decoration: none;
+	cursor: pointer;
 	color: black;
 	font-weight: bold;
+}
+
+.tweet-user a:hover {
+	text-decoration: underline;
+	color: blue;
 }
 
 .tweet-time {
