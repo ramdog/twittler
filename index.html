@@ -3,6 +3,7 @@
   <head>
     <link rel="stylesheet" type="text/css" href="twittler-stylesheet.css">
     <script src="jquery.js"></script>
+    <script src="jquery.timeago.js"></script>
     <script type="text/javascript" src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
     <script src="data_generator.js"></script>
   </head>
@@ -10,6 +11,7 @@
     <script>
 
       $(document).ready(function() {
+      	// $("time.timeago").timeago();
         var $stream = $('#stream');
         streams.users.me = [];
         var user;
@@ -78,10 +80,16 @@
             var tweet = newTweets[i];
             var $tweet = $('<div class="tweet"><div class="tweet-header"><div class="tweet-user"></div><div class="tweet-time"></div></div><div class="tweet-content"></div></div>');
             var formattedDate = formatDate(tweet.created_at);
+            var timeAgoHTMLStr = "<time class='timeago' datetime='" + 
+								tweet.created_at.toISOString() + 
+								"'>" + formattedDate + "</time>";
+			console.log(timeAgoHTMLStr);
             $tweet.find('.tweet-user').html('<a class="show-user">' + tweet.user + '</a>');
-            $tweet.find('.tweet-time').text(formattedDate);
+            // $tweet.find('.tweet-time').text(formattedDate);
+            $tweet.find('.tweet-time').html(timeAgoHTMLStr);
             $tweet.find('.tweet-content').text(tweet.message);
             $stream.prepend($tweet.hide().fadeIn('slow'));
+            $("time.timeago").timeago();
           }
 
           newTweets = [];
