@@ -9,8 +9,9 @@
   <body>
     <script>
 
-      $(document).ready(function(){
+      $(document).ready(function() {
         var $stream = $('#stream');
+        streams.users.me = [];
         var user;
         var newTweets;
         var lastTweetTime;
@@ -32,6 +33,20 @@
 
         $('#update-stream').on('click', function() {
           addNewTweets();
+        });
+
+        $('#add-tweet-form').on('submit', function(event) {
+        	event.preventDefault();
+        	var tweetMsg = $('#tweet-msg-input').val();
+    	  	var tweet = {
+				user: "me",
+				message: tweetMsg,
+				created_at: new Date()
+			};
+			$('#tweet-msg-input').val("");
+			addTweet(tweet);
+			updateNewTweets();
+			addNewTweets();
         });
 
         function resetHome() {
@@ -88,25 +103,37 @@
         function setTweetCount() {
           text = " New Tweets" + (user ? " for " + user : "");
           $('#new-tweets-count').text(newTweets.length + text);
-        };
+        }
 
-        function updateTweetButton() {
+        function updateNewTweets() {
           var latest = getLatestTweets();
           if (latest.length > 0){
-            newTweets = latest.concat(newTweets);
-            setTweetCount();
+            newTweets = latest.concat(newTweets);        	
           }
         }
+
+        function updateTweetButton() {
+          updateNewTweets();
+          setTweetCount();
+      	}
 
       });
 
     </script>
     <div>
       <div id="header">
-        <div id="page-title"><span id="page-title-text">Twittler</span></div>
-        <div id="button-container">
-          <button id="update-stream" name="update"><span id="new-tweets-count">0</span></button>
-        </div>
+        <div class="inline-col">
+        	<div id="page-title"><span id="page-title-text">Twittler</span></div>
+	        <div id="button-container">
+	          <button id="update-stream" class="btn" name="update"><span id="new-tweets-count">0</span></button>
+	        </div>
+	    </div>
+	    <div id="add-tweet" class="inline-col">
+	    	<form id="add-tweet-form">
+	    		<input type="text" placeholder="Tweet something!" required id="tweet-msg-input">
+	    		<input type="submit" value="Tweet It" class="btn" id="submit-tweet"> 
+	    	</form>
+	    </div>
       </div>
       <div id="stream"></div> 
     </div>

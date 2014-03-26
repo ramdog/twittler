@@ -5,7 +5,7 @@ html {
 	margin: auto;
 }
 
-#update-stream {
+.btn {
 	color: white;
 	background-color: #428bca;
 	margin-bottom: 0;
@@ -17,15 +17,24 @@ html {
 	border-radius: 6px;
 }
 
-#update-stream:hover {
+.btn:hover {
 	background-color: #3276b1;
 	border-color: black;
 }
 
-button:focus {
+.btn:focus {
 	outline: none;
 }
 
+#tweet-msg-input {
+	background-image: none;
+	border: 1px solid rgb(117, 117, 117);
+	padding: 4px 8px;
+	font-size: 14px;
+	border-radius: 6px;
+	margin: 0px;
+	width: 500px;
+}
 
 #button-container {
 	margin: 0px 15px 10px;
@@ -53,6 +62,19 @@ button:focus {
 	background-color: #A5A5A5;
 	border: 1px solid #838383;
 	border-radius: 5px;
+	display: block;
+}
+
+.inline-col {
+	vertical-align: bottom;
+	display: inline-block;
+}
+
+#add-tweet {
+	/*color: white;*/
+	/*background-color: #428bca;*/
+	margin: 0px 15px 10px;
+	border-radius: 6px;
 }
 
 #stream {
