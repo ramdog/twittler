@@ -41,17 +41,18 @@
         	event.preventDefault();
         	var tweetMsg = $('#tweet-msg-input').val();
     	  	var tweet = {
-				user: "me",
-				message: tweetMsg,
-				created_at: new Date()
-			};
-			$('#tweet-msg-input').val("");
-			addTweet(tweet);
-			updateNewTweets();
-			addNewTweets();
+    				user: "me",
+    				message: tweetMsg,
+    				created_at: new Date()
+          };
+    			$('#tweet-msg-input').val("");
+    			addTweet(tweet);
+    			updateNewTweets();
+    			addNewTweets();
         });
 
         function resetHome() {
+          $stream.empty();
           user = null;
           newTweets = streams.home.sort(function(a, b) {return b.created_at - a.created_at});
           lastTweetTime = newTweets[0].created_at;
@@ -83,7 +84,6 @@
             var timeAgoHTMLStr = "<time class='timeago' datetime='" + 
 								tweet.created_at.toISOString() + 
 								"'>" + formattedDate + "</time>";
-			console.log(timeAgoHTMLStr);
             $tweet.find('.tweet-user').html('<a class="show-user">' + tweet.user + '</a>');
             // $tweet.find('.tweet-time').text(formattedDate);
             $tweet.find('.tweet-time').html(timeAgoHTMLStr);
